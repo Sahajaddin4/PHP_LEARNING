@@ -27,8 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         if ($password == $confirmPassword) {
+            $hashedPassword=password_hash($password,PASSWORD_DEFAULT);
             $sql = "INSERT INTO `user` (`username`, `email`, `password`, `createdAt`)
-                    VALUES ('$username', '$email', '$password', CURRENT_TIMESTAMP)";
+                    VALUES ('$username', '$email', '$hashedPassword', CURRENT_TIMESTAMP)";
             $result = mysqli_query($conn, $sql);
 
             if ($result) {
@@ -75,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (mysqli_num_rows($result) == 1) {
             $row = mysqli_fetch_assoc($result);
 
-            if ($row['password'] == $password) {
+            if (password_verify($password,$row['password'])) {
                 $_SESSION['error'] = false;
                 $_SESSION['success'] = true;
                 $_SESSION['user'] = $row['username'];

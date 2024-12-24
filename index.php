@@ -31,8 +31,11 @@ unset($_SESSION['alert']);
         <?php include('./partial/navbar.php'); ?>
     </div>
 
-    <div class="username">
-        <?php echo $user?>
+    <div class="username md:w-[50%] mx-auto ">
+    <div class="p-4  mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+              <span class="font-medium text-xl">Welcome </span>  <h1 class="inline text-lg"><?php echo $user?> ! </h1><small>into our website</small>
+              </div>
+        
     </div>
     <script>
         const alert=document.querySelector('.alert');
